@@ -74,18 +74,20 @@ export default function BackroomsGame() {
 
   return (
     <div className="flex flex-col items-center p-8">
-      <Card className="w-full max-w-md">
-        <CardContent>
-          <p className="text-lg mb-4">{rooms[currentRoom].description}</p>
-          <div className="flex flex-col gap-2">
-            {rooms[currentRoom].options.map((option, index) => (
-              <Button key={index} onClick={() => setCurrentRoom(option.next)}>
-                {option.text}
-              </Button>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+      <div className="w-full max-w-md p-4 border border-gray-500 rounded-lg bg-gray-900 text-white">
+  <p className="text-lg mb-4">{rooms[currentRoom].description}</p>
+  <div className="flex flex-col gap-2">
+    {rooms[currentRoom].options.map((option, index) => (
+      <button 
+        key={index} 
+        onClick={() => setCurrentRoom(option.next)}
+        className="p-2 border border-gray-400 rounded bg-gray-700 hover:bg-gray-600"
+      >
+        {option.text}
+      </button>
+    ))}
+  </div>
+</div>
     </div>
   );
 }
