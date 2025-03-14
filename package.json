@@ -1,7 +1,7 @@
 
 {
   "homepage": "https://lazeoth.github.io/backrooms",
-  "name": "backrooms-game",
+  "name": "backrooms",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
