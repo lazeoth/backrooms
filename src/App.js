@@ -1,4 +1,3 @@
-import { useState } from "react";
 import React, { useState } from "react";
 
 const rooms = {
@@ -68,7 +67,7 @@ const rooms = {
   }
 };
 
-export default function BackroomsGame() {
+export default function Backrooms() {
   const [currentRoom, setCurrentRoom] = useState("start");
 
   return (
