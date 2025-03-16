@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const rooms = {
   start: {
@@ -7,63 +7,36 @@ const rooms = {
       { text: "Take the left hallway", next: "left_hallway" },
       { text: "Take the middle hallway", next: "middle_hallway" },
       { text: "Take the right hallway", next: "right_hallway" }
-    ]
+    ],
+    image: "start.png",
+    map: "[X] - -"
   },
   left_hallway: {
     description: "The left hallway is narrow, the walls seem to breathe. A flickering light at the end reveals a shadowy figure.",
     options: [
       { text: "Approach the figure", next: "shadow_encounter" },
       { text: "Turn back", next: "start" }
-    ]
+    ],
+    image: "left_hallway.png",
+    map: "X - -"
   },
   middle_hallway: {
     description: "The middle hallway stretches endlessly. The further you walk, the more you realize you're not making progress.",
     options: [
       { text: "Keep walking", next: "looping_hallway" },
       { text: "Turn back", next: "start" }
-    ]
+    ],
+    image: "middle_hallway.png",
+    map: "- X -"
   },
   right_hallway: {
     description: "The right hallway has an eerie silence. You see an old, rusty door slightly ajar.",
     options: [
       { text: "Enter the door", next: "rusty_room" },
       { text: "Turn back", next: "start" }
-    ]
-  },
-  shadow_encounter: {
-    description: "The shadow figure doesn't move, but as you get closer, its shape distorts into something indescribable...",
-    options: [
-      { text: "Run away", next: "start" },
-      { text: "Reach out to touch it", next: "void_fall" }
-    ]
-  },
-  looping_hallway: {
-    description: "You keep walking, but the hallway never ends. The walls seem to shift slightly with each step.",
-    options: [
-      { text: "Sit down and wait", next: "void_fall" },
-      { text: "Scream for help", next: "unknown_response" }
-    ]
-  },
-  rusty_room: {
-    description: "Inside the room, you find old papers scattered on the ground. One of them has the words 'DON'T TRUST THEM' scribbled in red ink.",
-    options: [
-      { text: "Look for more clues", next: "clue_discovery" },
-      { text: "Leave the room", next: "start" }
-    ]
-  },
-  void_fall: {
-    description: "The ground beneath you collapses, and you fall into an infinite void. The last thing you hear is whispering...",
-    options: []
-  },
-  unknown_response: {
-    description: "A voice responds to your scream, but it's your own voice repeating your words back at you from all directions...",
-    options: []
-  },
-  clue_discovery: {
-    description: "You find a key hidden inside one of the drawers. It has the number '303' engraved on it.",
-    options: [
-      { text: "Take the key and leave", next: "start" }
-    ]
+    ],
+    image: "right_hallway.png",
+    map: "- - X"
   }
 };
 
@@ -71,21 +44,27 @@ export default function Backrooms() {
   const [currentRoom, setCurrentRoom] = useState("start");
 
   return (
-    <div className="flex flex-col items-center p-8">
-      <div className="w-full max-w-md p-4 border border-gray-500 rounded-lg bg-gray-900 text-white">
-  <p className="text-lg mb-4">{rooms[currentRoom].description}</p>
-  <div className="flex flex-col gap-2">
-    {rooms[currentRoom].options.map((option, index) => (
-      <button 
-        key={index} 
-        onClick={() => setCurrentRoom(option.next)}
-        className="p-2 border border-gray-400 rounded bg-gray-700 hover:bg-gray-600"
-      >
-        {option.text}
-      </button>
-    ))}
-  </div>
-</div>
+    <div className="flex flex-col items-center p-8 text-white bg-black min-h-screen">
+      <div className="w-full max-w-md p-4 border border-gray-500 rounded-lg bg-gray-900">
+        <pre className="text-green-400 text-sm mb-2">{rooms[currentRoom].map}</pre>
+        <img 
+          src={rooms[currentRoom].image} 
+          alt="Current room" 
+          className="w-full h-auto mb-4 border border-gray-700 rounded" 
+        />
+        <p className="text-lg mb-4">{rooms[currentRoom].description}</p>
+        <div className="flex flex-col gap-2">
+          {rooms[currentRoom].options.map((option, index) => (
+            <button 
+              key={index} 
+              onClick={() => setCurrentRoom(option.next)}
+              className="p-2 border border-gray-400 rounded bg-gray-700 hover:bg-gray-600"
+            >
+              {option.text}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
